@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function MiniChatBot() {
   const [messages, setMessages] = useState([
-    { from: "bot", text: "Hi, I'm your Portfolio Assistant! Ask me anything about Tamilarasu — skills, projects, or resume." },
+    { from: "bot", text: "Hi, I'm AruAI! Ask me anything about Tamilarasu — skills, projects, or resume." },
   ]);
 
   const [input, setInput] = useState("");
@@ -52,7 +52,7 @@ export default function MiniChatBot() {
     <GlassCard className="glow-hover">
 
       {/* Title */}
-      <h3 className="font-semibold mb-2 text-lg">AI Chat Assistant</h3>
+      <h3 className="font-semibold mb-2 text-lg">AruAI</h3>
 
       {/* Chat Window */}
       <div
@@ -68,11 +68,10 @@ export default function MiniChatBot() {
             className={m.from === "user" ? "text-right" : "text-left"}
           >
             <span
-              className={`inline-block px-3 py-2 rounded-xl max-w-[80%] break-words ${
-                m.from === "user"
+              className={`inline-block px-3 py-2 rounded-xl max-w-[80%] break-words ${m.from === "user"
                   ? "bg-cyan-500 text-black"
                   : "bg-white/10 border border-white/10"
-              }`}
+                }`}
             >
               {m.text}
             </span>

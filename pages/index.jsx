@@ -16,6 +16,7 @@ import FadeInUp from "../components/FadeInUp";
 import ContactForm from "../components/ContactForm";
 import SkillGlobe from "../components/SkillGlobe";   // ⭐ NEW 3D GLOBE
 import AboutSection from "../components/AboutSection";
+import ExperienceSection from "../components/ExperienceSection";
 import React from "react";
 
 export default function Home() {
@@ -126,6 +127,11 @@ export default function Home() {
             <h2 className="text-2xl font-bold mb-4">My Journey</h2>
             <MiniTimeline />
           </FadeInUp>
+        </section>
+
+        {/* ================= EXPERIENCE ================= */}
+        <section id="experience" className="max-w-5xl mx-auto px-6 py-12">
+          <ExperienceSection />
         </section>
 
         {/* ================= ACHIEVEMENTS ================= */}

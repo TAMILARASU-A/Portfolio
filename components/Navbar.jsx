@@ -14,12 +14,13 @@ export default function Navbar() {
     { label: "Skills", href: "#skills" },
     { label: "Timeline", href: "#timeline" },
     { label: "Experience", href: "#experience" },
+    { label: "AruAI", href: "#chatbot" },
     { label: "Contact", href: "#contact" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "projects", "skills", "timeline", "experience", "contact"];
+      const sections = ["hero", "about", "projects", "skills", "timeline", "experience", "chatbot", "contact"];
       const scrollY = window.scrollY + 100;
 
       for (const section of sections) {

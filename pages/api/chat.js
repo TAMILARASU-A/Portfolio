@@ -52,22 +52,35 @@ You are Tamilarasu A's portfolio chatbot. Answer ONLY questions about Tamilarasu
 
 PORTFOLIO DATA:
 - Name: Tamilarasu A
-- Current: MCA Graduate (May 2026) from Coimbatore Institute of Technology (CIT)
-- Roles: MCA Graduate, Python Developer, AI Enthusiast, Software Developer, Building AI-Integrated Applications
+- Current: MCA student at Coimbatore Institute of Technology (CIT), expected to complete in May 2026
+- Roles: MCA Student, Python Developer, AI Enthusiast, Software Developer, Building AI-Integrated Applications
 - Education:
   * SSLC (2018-2019): Kumutha Matriculation Higher Secondary School, Erode - 76.2%
   * HSC (2020-2021): Kumutha Matriculation Higher Secondary School, Erode - 83.6%
   * BCA (2021-2024): Gobi Arts and Science College, Gobichettipalayam - CGPA: 7.6 - Achievement: Proficiency in BCA for academic excellence
-  * MCA (2024-May 2026): Coimbatore Institute of Technology, Coimbatore - CGPA: 7.76 (Completed)
+  * MCA (2024-May 2026): Coimbatore Institute of Technology, Coimbatore - CGPA: 7.76
   * Internship (Dec 2025-May 2026): Application Development and Support - ARGA Investment Management (India) Private Limited, Chennai (On-site)
 
-- Skills: Python, Java, C, React, Next.js, JavaScript, HTML5, CSS3, Tailwind CSS, Bootstrap, MySQL, MongoDB, Flask, Django, Node.js, Git, GitHub, PyCharm, Vercel, Firebase, PyTorch, TensorFlow, NumPy, Pandas
+- Experience:
+  * ARGA Investment Management: Worked with Angular, NG ZORRO, .NET (C#), and SQL Server for application development and support.
+  * Boredom Technologies LLP (Jun 2025, 1 month, Remote): Web Development Intern (Full Stack) and built MicroMuse, an AI-powered microfiction web app using Next.js, FastAPI, Firebase, and Gemini API. Implemented Firebase Auth, Firestore, and PDF/image sharing features.
+
+- Skills: Python, Java, C, C#, Angular, React, Next.js, JavaScript, HTML5, CSS3, Tailwind CSS, Bootstrap, NG ZORRO, MySQL, SQL Server, MongoDB, Flask, Django, .NET, Node.js, Git, GitHub, PyCharm, Vercel, Firebase, Streamlit, Plotly, PyTorch, TensorFlow, NumPy, Pandas, OpenCV, XGBoost, PySpark, MATLAB
 
 - Projects:
-  * InterviewXpert - AI Interview Helper (Python, Kivy)
-  * Personal Book Recommender - AI-powered reading system (Python, Flask)
+  * AI-Powered Career Guidance & Skill Recommendation System
+  * ChildGuard-Browser — AI-Powered Chrome Extension
+  * MicroMuse – AI-powered Storytelling Platform
+  * Karmithra – AI-Powered Tax Assistant
+  * Diet Recommendation System (Prolog-Based)
+  * InsightCart AI – Product Intelligence Analyzer
 
-- About: I am Tamilarasu A — MCA Graduate (May 2026), Python Developer, and AI Enthusiast. I love building intelligent apps, designing beautiful UI, and solving real-world problems with modern technologies.
+- About: I am Tamilarasu A — an MCA student, Python Developer, and AI Enthusiast. I love building intelligent apps, designing beautiful UI, and solving real-world problems with modern technologies.
+
+- Achievements:
+  * Proficiency Award from Gobi Arts and Science College for 2nd highest academic score in BCA
+  * LeetCode 50 Days Badge
+  * LeetCode 100 Days Badge
 
 - Links:
   * LinkedIn: https://www.linkedin.com/in/tamilarasu-a-74b936287/
@@ -91,16 +104,26 @@ CONSTRAINTS:
 function buildFallbackReply(message) {
   const question = String(message || "").toLowerCase();
 
+  if (
+    question.includes("experience") ||
+    question.includes("intern") ||
+    question.includes("internship") ||
+    question.includes("arga") ||
+    question.includes("boredom")
+  ) {
+    return "Tamilarasu has internship experience at ARGA Investment Management (Angular, NG ZORRO, .NET/C#, SQL Server) and Boredom Technologies LLP (Web Development Intern) where he built MicroMuse using Next.js, FastAPI, Firebase, and Gemini API.";
+  }
+
   if (question.includes("skill") || question.includes("tech stack") || question.includes("technology")) {
-    return "Tamilarasu's main skills include Python, Java, C, React, Next.js, JavaScript, HTML5, CSS3, Tailwind CSS, Bootstrap, MySQL, MongoDB, Flask, Django, Node.js, Git, GitHub, PyTorch, TensorFlow, NumPy, and Pandas.";
+    return "Tamilarasu's main skills include Python, Java, C, C#, Angular, React, Next.js, JavaScript, Tailwind CSS, Bootstrap, NG ZORRO, .NET, Node.js, Flask, Django, MySQL, SQL Server, MongoDB, Firebase, Git, GitHub, PyTorch, TensorFlow, NumPy, and Pandas.";
   }
 
   if (question.includes("project") || question.includes("work")) {
-    return "Tamilarasu has built projects like InterviewXpert (AI Interview Helper using Python + Kivy) and Personal Book Recommender (AI-powered system using Python + Flask).";
+    return "Tamilarasu has built projects like the AI-Powered Career Guidance & Skill Recommendation System, ChildGuard-Browser, MicroMuse, Karmithra, Diet Recommendation System, and InsightCart AI.";
   }
 
   if (question.includes("education") || question.includes("study") || question.includes("college") || question.includes("cgpa")) {
-    return "Tamilarasu completed BCA (CGPA 7.6) at Gobi Arts and Science College and completed MCA in May 2026 (CGPA 7.76) at Coimbatore Institute of Technology (CIT). He also completed an Application Development and Support internship at ARGA Investment Management (India) Private Limited from Dec 2025 to May 2026.";
+    return "Tamilarasu studied SSLC and HSC at Kumutha Matriculation Higher Secondary School, completed BCA at Gobi Arts and Science College with CGPA 7.6, and is currently pursuing MCA at Coimbatore Institute of Technology with CGPA 7.76 (expected May 2026). He is also doing an Application Development and Support internship at ARGA Investment Management (India) Private Limited.";
   }
 
   if (question.includes("linkedin")) {
@@ -130,7 +153,7 @@ function buildFallbackReply(message) {
     question.includes("current") ||
     question.includes("role")
   ) {
-    return "Tamilarasu A is an MCA graduate from CIT (May 2026), a Python Developer, and an AI Enthusiast focused on building AI-integrated applications.";
+    return "Tamilarasu A is an MCA student at CIT, a Python Developer, and an AI Enthusiast focused on building AI-integrated applications.";
   }
 
   return "I can help with Tamilarasu's portfolio details like skills, education, projects, achievements, and profile links. Ask me about any of those.";
