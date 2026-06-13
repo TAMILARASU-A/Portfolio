@@ -32,7 +32,9 @@ export default function AboutSection() {
                             <p>
                                 Hi, I'm{" "}
                                 <span className="text-cyan-400 font-semibold">Tamilarasu</span>
-                                — an <span className="text-blue-400 font-semibold">MCA student</span> passionate about
+                                — an <span className="text-blue-400 font-semibold">MCA graduate</span> and
+                                <span className="text-pink-400 font-semibold"> Programmer Associate</span> at
+                                <span className="text-cyan-400"> ARGA Investment Management</span>, passionate about
                                 <span className="text-pink-400 font-semibold"> Python development</span> and
                                 building <span className="text-cyan-400">real-world applications</span>.
                             </p>
@@ -48,13 +50,12 @@ export default function AboutSection() {
                             </p>
 
                             <p>
-                                Currently, I'm working as an{" "}
-                                <span className="text-blue-400 font-semibold">ADS (Application Development and Support) Intern</span> at
-                                <span className="text-pink-400 font-semibold"> ARGA Investment Management</span>,
-                                Chennai. Through this experience, I've been exposed to{" "}
-                                <span className="text-cyan-400">real-world development environments</span>,
-                                support systems, and practical implementation of
-                                <span className="text-blue-400"> enterprise applications</span>.
+                                Currently, I work full-time as a <span className="text-blue-400 font-semibold">Programmer Associate</span> at
+                                <span className="text-pink-400 font-semibold"> ARGA Investment Management</span>, Chennai. I work on
+                                <span className="text-cyan-400"> enterprise web applications</span> using technologies like
+                                <span className="text-blue-400"> Angular</span>, <span className="text-pink-400">.NET (C#)</span>, and
+                                <span className="text-cyan-400"> SQL Server</span>, and I participate in feature design, code
+                                reviews, and production deployments.
                             </p>
 
                             <p>

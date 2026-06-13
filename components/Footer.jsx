@@ -168,23 +168,7 @@ export default function Footer() {
                     })}
                 </motion.div>
 
-                {/* Bottom Text */}
-                <motion.div
-                    variants={itemVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    className="text-center border-t border-white/5 pt-8"
-                >
-                    <p className="text-white/50 text-sm mb-2">
-                        © {new Date().getFullYear()} Tamilarasu A. All rights reserved.
-                    </p>
-                    <p className="text-white/40 text-xs">
-                        Designed & Built with <span className="text-red-400">❤️</span> using
-                        <span className="text-cyan-300"> Next.js</span>,
-                        <span className="text-purple-300"> React</span>, &
-                        <span className="text-blue-300"> Tailwind CSS</span>
-                    </p>
-                </motion.div>
+                {/* Bottom Text removed as requested */}
             </div>
 
             {/* Animated background */}

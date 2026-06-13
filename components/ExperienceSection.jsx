@@ -6,10 +6,21 @@ import GlassCard from "./GlassCard";
 
 const experiences = [
     {
-        role: "ADS Intern (Application Development & Support)",
+        role: "Programmer Associate (Full-time)",
         company: "ARGA Investment Management",
         location: "Chennai, India",
-        period: "Current",
+        period: "May 2026 - Present",
+        points: [
+            "Developing and maintaining enterprise web applications using Angular and .NET (C#).",
+            "Implementing backend APIs and database operations with SQL Server.",
+            "Participating in feature design, code reviews, and production deployments.",
+        ],
+    },
+    {
+        role: "Application Development and Support (Internship)",
+        company: "ARGA Investment Management",
+        location: "Chennai, India",
+        period: "Dec 2025 - May 2026",
         points: [
             "Worked on enterprise UI development using Angular and NZ Zorro components.",
             "Contributed to backend features and APIs using .NET (C#).",
@@ -36,6 +47,18 @@ const experiences = [
             "Built AI and web-based applications using Python, React, and Next.js.",
             "Developed solutions in recommendation systems, automation, and analytics.",
             "Improved problem-solving through hands-on product-oriented development.",
+        ],
+    },
+    {
+        role: "Part-Time Operations Assistant",
+        company: "Family-Run Snack Production (Cottage Industry)",
+        location: "Gopichettipalayam, Tamil Nadu, India",
+        period: "Jan 2020 - Dec 2025",
+        points: [
+            "Assisted in the production and packaging of traditional snacks, primarily Murukku.",
+            "Supported raw material preparation and daily production activities in a small-scale cottage industry.",
+            "Helped coordinate distribution of products to local wholesale and retail shops.",
+            "Maintained basic hygiene and quality standards during preparation and packaging.",
         ],
     },
 ];

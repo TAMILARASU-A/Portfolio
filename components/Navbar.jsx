@@ -12,6 +12,7 @@ export default function Navbar() {
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
     { label: "Skills", href: "#skills" },
+    { label: "Certificates", href: "#certificates" },
     { label: "Timeline", href: "#timeline" },
     { label: "Experience", href: "#experience" },
     { label: "AruAI", href: "#chatbot" },
@@ -20,7 +21,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "projects", "skills", "timeline", "experience", "chatbot", "contact"];
+      const sections = ["hero", "about", "projects", "skills", "certificates", "timeline", "experience", "chatbot", "contact"];
       const scrollY = window.scrollY + 100;
 
       for (const section of sections) {

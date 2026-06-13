@@ -17,6 +17,7 @@ import ContactForm from "../components/ContactForm";
 import SkillGlobe from "../components/SkillGlobe";   // ⭐ NEW 3D GLOBE
 import AboutSection from "../components/AboutSection";
 import ExperienceSection from "../components/ExperienceSection";
+import Certificates from "../components/Certificates";
 import React from "react";
 
 export default function Home() {
@@ -119,6 +120,11 @@ export default function Home() {
             <h2 className="text-2xl font-bold mb-4">Skills</h2>
             <SkillGlobe />   {/*  ⭐ Your new 3D rotating skill globe */}
           </FadeInUp>
+        </section>
+
+        {/* ================= CERTIFICATES ================= */}
+        <section id="certificates" className="max-w-5xl mx-auto px-6 py-12">
+          <Certificates />
         </section>
 
         {/* ================= TIMELINE ================= */}

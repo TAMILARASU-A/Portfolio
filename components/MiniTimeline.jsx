@@ -40,6 +40,13 @@ export default function MiniTimeline() {
       score: "6-month internship • On-site",
       icon: <FaLaptopCode className="text-cyan-300 text-xl" />,
     },
+    {
+      year: "May 2026 – Present",
+      title: "Programmer Associate (Full-time)",
+      school: "ARGA Investment Management (India) Private Limited, Chennai",
+      score: "Full-time • On-site",
+      icon: <FaLaptopCode className="text-cyan-300 text-xl" />,
+    },
   ];
 
   return (
