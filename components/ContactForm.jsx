@@ -1,7 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import GlassCard from "./GlassCard";
+
+const emailJSConfig = {
+  serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+  templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+};
+
+const canUseEmailJS = Boolean(
+  emailJSConfig.serviceId &&
+  emailJSConfig.templateId &&
+  emailJSConfig.publicKey
+);
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -20,21 +33,41 @@ export default function ContactForm() {
     setStatus("Sending...");
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+      if (canUseEmailJS) {
+        const result = await emailjs.send(
+          emailJSConfig.serviceId,
+          emailJSConfig.templateId,
+          {
+            from_name: form.name,
+            from_email: form.email,
+            message: form.message,
+          },
+          emailJSConfig.publicKey
+        );
 
-      const data = await response.json();
+        if (result.status !== 200) {
+          throw new Error("EmailJS failed to send the message.");
+        }
 
-      if (!response.ok) {
-        throw new Error(data?.message || "Failed to send message.");
+        setStatus("Message sent successfully. I will get back to you soon.");
+      } else {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data?.message || "Failed to send message.");
+        }
+
+        setStatus(data?.message || "Message sent successfully!");
       }
 
-      setStatus(data?.message || "Message sent successfully!");
       setForm({ name: "", email: "", message: "" });
     } catch (err) {
       setStatus(err.message || "Failed to send. Try again!");
