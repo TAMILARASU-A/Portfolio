@@ -1,32 +1,70 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Navbar from "../components/Navbar";
 import ParticleBackground from "../components/ParticleBackground";
 import AuroraBackground from "../components/AuroraBackground";
 import Hero from "../components/Hero";
-import MiniChatBot from "../components/MiniChatBot";
-import MiniDevDashboard from "../components/MiniDevDashboard";
-import MiniTimeline from "../components/MiniTimeline";
 import MiniProjectCard from "../components/MiniProjectCard";
-import FeaturedWork from "../components/FeaturedWork";
-import Achievements from "../components/Achievements";
-import Footer from "../components/Footer";
-import GlassCard from "../components/GlassCard";
 import FadeInUp from "../components/FadeInUp";
-import ContactForm from "../components/ContactForm";
-import SkillGlobe from "../components/SkillGlobe";   // ⭐ NEW 3D GLOBE
 import AboutSection from "../components/AboutSection";
-import ExperienceSection from "../components/ExperienceSection";
-import Certificates from "../components/Certificates";
 import React from "react";
+import useIsMobile from "../components/useIsMobile";
+
+const FeaturedWorkSection = dynamic(() => import("../components/FeaturedWork"), {
+  ssr: false,
+  loading: () => <div className="h-40 max-w-5xl mx-auto px-6" />,
+});
+
+const SkillGlobeSection = dynamic(() => import("../components/SkillGlobe"), {
+  ssr: false,
+  loading: () => <div className="h-40 rounded-2xl border border-white/10 bg-white/5 animate-pulse max-w-5xl mx-auto" />,
+});
+
+const CertificatesSection = dynamic(() => import("../components/Certificates"), {
+  ssr: false,
+  loading: () => <div className="h-40 rounded-2xl border border-white/10 bg-white/5 animate-pulse max-w-5xl mx-auto" />,
+});
+
+const TimelineSection = dynamic(() => import("../components/MiniTimeline"), {
+  ssr: false,
+  loading: () => <div className="h-40 rounded-2xl border border-white/10 bg-white/5 animate-pulse max-w-5xl mx-auto" />,
+});
+
+const ExperienceSection = dynamic(() => import("../components/ExperienceSection"), {
+  ssr: false,
+  loading: () => <div className="h-40 rounded-2xl border border-white/10 bg-white/5 animate-pulse max-w-5xl mx-auto" />,
+});
+
+const AchievementsSection = dynamic(() => import("../components/Achievements"), {
+  ssr: false,
+  loading: () => <div className="h-40 rounded-2xl border border-white/10 bg-white/5 animate-pulse max-w-5xl mx-auto" />,
+});
+
+const ChatBotSection = dynamic(() => import("../components/MiniChatBot"), {
+  ssr: false,
+  loading: () => <div className="h-40 rounded-2xl border border-white/10 bg-white/5 animate-pulse max-w-5xl mx-auto" />,
+});
+
+const ContactFormSection = dynamic(() => import("../components/ContactForm"), {
+  ssr: false,
+  loading: () => <div className="h-40 rounded-2xl border border-white/10 bg-white/5 animate-pulse max-w-5xl mx-auto" />,
+});
+
+const FooterSection = dynamic(() => import("../components/Footer"), {
+  ssr: false,
+  loading: () => <div className="h-24" />,
+});
 
 export default function Home() {
+  const isMobile = useIsMobile();
+
   return (
     <div className="min-h-screen text-white relative overflow-x-hidden">
 
       {/* Background Layers */}
-      <AuroraBackground />
-      <ParticleBackground />
+      {!isMobile && <AuroraBackground />}
+      {!isMobile && <ParticleBackground />}
       <Navbar />
 
       <main className="relative z-10">
@@ -43,7 +81,7 @@ export default function Home() {
 
 
         {/* ================= FEATURED WORK ================= */}
-        <FeaturedWork />
+        <FeaturedWorkSection />
 
         {/* ================= PROJECTS ================= */}
         <section id="projects" className="max-w-5xl mx-auto px-6 py-12">
@@ -118,20 +156,20 @@ export default function Home() {
         <section id="skills" className="max-w-5xl mx-auto px-6 py-12">
           <FadeInUp delay={0.25}>
             <h2 className="text-2xl font-bold mb-4">Skills</h2>
-            <SkillGlobe />   {/*  ⭐ Your new 3D rotating skill globe */}
+            <SkillGlobeSection />
           </FadeInUp>
         </section>
 
         {/* ================= CERTIFICATES ================= */}
         <section id="certificates" className="max-w-5xl mx-auto px-6 py-12">
-          <Certificates />
+          <CertificatesSection />
         </section>
 
         {/* ================= TIMELINE ================= */}
         <section id="timeline" className="max-w-5xl mx-auto px-6 py-12">
           <FadeInUp delay={0.3}>
             <h2 className="text-2xl font-bold mb-4">My Journey</h2>
-            <MiniTimeline />
+            <TimelineSection />
           </FadeInUp>
         </section>
 
@@ -141,13 +179,13 @@ export default function Home() {
         </section>
 
         {/* ================= ACHIEVEMENTS ================= */}
-        <Achievements />
+        <AchievementsSection />
 
         {/* ================= CHATBOT ================= */}
         <section id="chatbot" className="max-w-5xl mx-auto px-6 py-12">
           <FadeInUp delay={0.4}>
             <h2 className="text-2xl font-bold mb-4">Chat With My AI Bot</h2>
-            <MiniChatBot />
+            <ChatBotSection />
           </FadeInUp>
         </section>
 
@@ -155,12 +193,12 @@ export default function Home() {
         <section id="contact" className="max-w-5xl mx-auto px-6 pb-20 pt-12">
           <FadeInUp delay={0.5}>
             <h2 className="text-2xl font-bold mb-4">Contact Me</h2>
-            <ContactForm />
+            <ContactFormSection />
           </FadeInUp>
         </section>
 
         {/* ================= FOOTER ================= */}
-        <Footer />
+        <FooterSection />
 
       </main>
     </div>

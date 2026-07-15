@@ -2,8 +2,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import useIsMobile from "./useIsMobile";
 
 export default function Navbar() {
+  const isMobile = useIsMobile();
   const [activeSection, setActiveSection] = useState("hero");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -50,15 +52,15 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={isMobile ? false : { y: -20, opacity: 0 }}
+        animate={isMobile ? { opacity: 1 } : { y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
         className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/5 border-b border-white/10 shadow-lg"
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
           {/* Left Logo */}
           <motion.a
-            whileHover={{ scale: 1.05 }}
+            whileHover={isMobile ? undefined : { scale: 1.05 }}
             href="#hero"
             onClick={(e) => {
               e.preventDefault();
@@ -74,8 +76,8 @@ export default function Navbar() {
             {navLinks.map((link, i) => (
               <motion.a
                 key={i}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={isMobile ? undefined : { scale: 1.05 }}
+                whileTap={isMobile ? undefined : { scale: 0.95 }}
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
@@ -102,7 +104,7 @@ export default function Navbar() {
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition"
-            whileTap={{ scale: 0.95 }}
+            whileTap={isMobile ? undefined : { scale: 0.95 }}
           >
             {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </motion.button>

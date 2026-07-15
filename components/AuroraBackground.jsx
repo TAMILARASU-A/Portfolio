@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import useIsMobile from "./useIsMobile";
 
 export default function AuroraBackground() {
   const canvasRef = useRef(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    if (isMobile || !canvasRef.current) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 

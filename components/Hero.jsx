@@ -4,9 +4,11 @@ import { Typewriter } from "react-simple-typewriter";
 import { FaGithub, FaLinkedin, FaHackerrank } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import { useState, useEffect } from "react";
+import useIsMobile from "./useIsMobile";
 
 export default function Hero() {
   const [open, setOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -26,8 +28,8 @@ export default function Hero() {
         {/* LEFT SIDE */}
         <div>
           <motion.h1
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={isMobile ? false : { opacity: 0, x: -20 }}
+            animate={isMobile ? { opacity: 1 } : { opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             className="text-5xl font-extrabold leading-tight"
           >
@@ -36,7 +38,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={isMobile ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
             className="mt-4 text-lg opacity-80"
@@ -137,8 +139,8 @@ export default function Hero() {
 
         {/* RIGHT SIDE IMAGE */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={isMobile ? false : { opacity: 0, scale: 0.92 }}
+          animate={isMobile ? { opacity: 1 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 0.7 }}
           className="flex justify-center"
         >
@@ -148,6 +150,8 @@ export default function Hero() {
             <img
               src="/avatar.png"
               alt="Profile"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center rounded-full"
             />
           </div>

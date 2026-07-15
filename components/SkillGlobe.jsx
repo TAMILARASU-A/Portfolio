@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import GlassCard from "./GlassCard";
 import IconCloud from "./ui/icon-cloud";
+import useIsMobile from "./useIsMobile";
 import { FiCode, FiGrid, FiDatabase, FiCpu, FiCamera } from "react-icons/fi";
 
 const skillCloudItems = [
@@ -102,6 +103,7 @@ const skillGroups = [
 ];
 
 export default function SkillGlobe() {
+  const isMobile = useIsMobile();
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedSkill, setSelectedSkill] = useState("Click a skill to highlight");
 
@@ -138,8 +140,14 @@ export default function SkillGlobe() {
 
       {/* Globe */}
       <div className="mb-8 flex flex-col items-center gap-3">
-        <div className="w-[310px] h-[310px] md:w-[340px] md:h-[340px] opacity-85 saturate-75">
-          <IconCloud iconSlugs={skillSlugs} iconLabels={skillLabels} onIconClick={setSelectedSkill} />
+        <div className={`w-[310px] h-[310px] md:w-[340px] md:h-[340px] opacity-85 saturate-75 ${isMobile ? "pointer-events-none" : ""}`}>
+          {!isMobile ? (
+            <IconCloud iconSlugs={skillSlugs} iconLabels={skillLabels} onIconClick={setSelectedSkill} />
+          ) : (
+            <div className="w-full h-full rounded-full border border-cyan-400/20 bg-cyan-500/10 flex items-center justify-center text-center px-6 text-sm text-cyan-100/90">
+              Interactive skills cloud is disabled on mobile for smoother performance.
+            </div>
+          )}
         </div>
         <div className="px-3 py-1 rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-100 text-xs md:text-sm font-medium">
           {selectedSkill}
@@ -156,8 +164,8 @@ export default function SkillGlobe() {
               type="button"
               onClick={() => setActiveFilter(filter)}
               className={`px-3 py-1.5 rounded-lg border text-xs md:text-sm leading-tight transition-colors ${isActive
-                  ? "border-cyan-400/70 bg-cyan-500/15 text-white"
-                  : "border-white/25 bg-transparent text-white/90 hover:bg-white/5"
+                ? "border-cyan-400/70 bg-cyan-500/15 text-white"
+                : "border-white/25 bg-transparent text-white/90 hover:bg-white/5"
                 }`}
             >
               {filter}
