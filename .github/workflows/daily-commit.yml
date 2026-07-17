@@ -1,0 +1,35 @@
+name: Daily Auto Commit
+
+# Runs on a schedule + lets you trigger it manually from the Actions tab
+on:
+  schedule:
+    # Runs every day at 09:00 UTC. Adjust the cron expression as needed.
+    # Cron format: minute hour day month day-of-week
+    - cron: '0 9 * * *'
+  workflow_dispatch: {}
+
+# Needed so the workflow is allowed to push back to the repo
+permissions:
+  contents: write
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Append log entry
+        run: |
+          mkdir -p logs
+          echo "- $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> logs/activity-log.md
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add logs/activity-log.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: daily activity log update"
+          git push
