@@ -17,17 +17,14 @@ import AboutSection from "../components/AboutSection";
 import ExperienceSection from "../components/ExperienceSection";
 import Certificates from "../components/Certificates";
 import React from "react";
-import useIsMobile from "../components/useIsMobile";
 
 export default function Home() {
-  const isMobile = useIsMobile();
-
   return (
-    <div className="min-h-screen text-white relative overflow-x-hidden">
+    <div className="min-h-screen text-white bg-[#071021] relative overflow-x-hidden">
 
       {/* Background Layers */}
-      {!isMobile && <AuroraBackground />}
-      {!isMobile && <ParticleBackground />}
+      <AuroraBackground />
+      <ParticleBackground />
       <Navbar />
 
       <main className="relative z-10">

@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export default function useIsMobile(breakpoint = 768) {
-    const [isMobile, setIsMobile] = useState(false);
+    const getInitialMobile = () => {
+        if (typeof window === "undefined") return false;
+        return window.matchMedia(`(max-width: ${breakpoint}px)`).matches;
+    };
 
-    useEffect(() => {
-        if (typeof window === "undefined") return;
+    const [isMobile, setIsMobile] = useState(getInitialMobile);
 
+    useLayoutEffect(() => {
         const mediaQuery = window.matchMedia(`(max-width: ${breakpoint}px)`);
         const update = (event) => setIsMobile(event.matches);
 
-        update(mediaQuery);
+        setIsMobile(mediaQuery.matches);
 
         if (typeof mediaQuery.addEventListener === "function") {
             mediaQuery.addEventListener("change", update);

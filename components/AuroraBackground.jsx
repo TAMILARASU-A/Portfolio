@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import useIsMobile from "./useIsMobile";
 
 export default function AuroraBackground() {
   const canvasRef = useRef(null);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (isMobile || !canvasRef.current) return;
+    if (!canvasRef.current || window.innerWidth <= 768) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -57,7 +55,7 @@ export default function AuroraBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-20 opacity-[0.8] pointer-events-none"
+      className="hidden md:block fixed inset-0 w-full h-full -z-20 opacity-[0.8] pointer-events-none"
     />
   );
 }
