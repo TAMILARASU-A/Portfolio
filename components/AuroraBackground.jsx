@@ -53,9 +53,15 @@ export default function AuroraBackground() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="hidden md:block fixed inset-0 w-full h-full -z-20 opacity-[0.8] pointer-events-none"
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className="hidden md:block fixed inset-0 w-full h-full -z-20 opacity-[0.8] pointer-events-none"
+      />
+
+      <div className="md:hidden fixed inset-0 -z-20 pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,255,255,0.16),transparent_18%),radial-gradient(circle_at_60%_20%,_rgba(0,140,255,0.12),transparent_24%),linear-gradient(180deg,_rgba(2,25,45,0.95),rgba(4,16,24,0.95))]" />
+      </div>
+    </>
   );
 }

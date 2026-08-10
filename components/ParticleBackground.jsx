@@ -88,9 +88,15 @@ export default function ParticleBackground() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="hidden md:block fixed inset-0 w-full h-full -z-10 opacity-70 pointer-events-none"
-    ></canvas>
+    <>
+      <canvas
+        ref={canvasRef}
+        className="hidden md:block fixed inset-0 w-full h-full -z-10 opacity-70 pointer-events-none"
+      ></canvas>
+
+      <div className="md:hidden fixed inset-0 -z-10 pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,255,255,0.12),transparent_20%),radial-gradient(circle_at_bottom_left,_rgba(0,140,255,0.08),transparent_28%),linear-gradient(180deg,rgba(0,18,32,0.8),rgba(2,12,21,0.9))]" />
+      </div>
+    </>
   );
 }
