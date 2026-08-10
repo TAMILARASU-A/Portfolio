@@ -139,8 +139,8 @@ export default function Hero() {
 
         {/* RIGHT SIDE IMAGE */}
         <motion.div
-          initial={isMobile ? false : { opacity: 0, scale: 0.92 }}
-          animate={isMobile ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7 }}
           className="flex justify-center"
         >

@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import GlassCard from "./GlassCard";
 import IconCloud from "./ui/icon-cloud";
+import useIsMobile from "./useIsMobile";
 import { FiCode, FiGrid, FiDatabase, FiCpu, FiCamera } from "react-icons/fi";
 
 const skillCloudItems = [
@@ -102,6 +103,7 @@ const skillGroups = [
 ];
 
 export default function SkillGlobe() {
+  const isMobile = useIsMobile();
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedSkill, setSelectedSkill] = useState("Click a skill to highlight");
 
@@ -139,26 +141,12 @@ export default function SkillGlobe() {
       {/* Globe */}
       <div className="mb-8 flex flex-col items-center gap-3">
         <div className="w-[310px] h-[310px] md:w-[340px] md:h-[340px] opacity-85 saturate-75">
-          <div className="hidden md:block h-full w-full rounded-full border border-cyan-400/20 bg-cyan-500/10">
-            <IconCloud iconSlugs={skillSlugs} iconLabels={skillLabels} onIconClick={setSelectedSkill} />
-          </div>
-
-          <div className="md:hidden h-full w-full rounded-full border border-cyan-400/20 bg-cyan-500/10 p-4 overflow-hidden">
-            <div className="h-full w-full rounded-full bg-[radial-gradient(circle,_rgba(0,255,255,0.15),transparent_40%)] shadow-inner shadow-cyan-500/20 flex flex-col justify-between p-4">
-              <div className="grid grid-cols-2 gap-2">
-                {skillCloudItems.slice(0, 8).map((skill) => (
-                  <span
-                    key={skill.slug}
-                    className="rounded-full bg-white/10 px-2 py-1 text-[10px] text-cyan-100/90 text-center"
-                  >
-                    {skill.label}
-                  </span>
-                ))}
-              </div>
-              <div className="text-xs text-cyan-100/80 leading-tight mt-2">
-                Mobile-friendly skill preview for faster loading.
-              </div>
-            </div>
+          <div className="h-full w-full rounded-full border border-cyan-400/20 bg-cyan-500/10 overflow-hidden">
+            <IconCloud
+              iconSlugs={isMobile ? skillSlugs.slice(0, 14) : skillSlugs}
+              iconLabels={skillLabels}
+              onIconClick={setSelectedSkill}
+            />
           </div>
         </div>
         <div className="px-3 py-1 rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-100 text-xs md:text-sm font-medium">

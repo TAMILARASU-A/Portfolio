@@ -6,32 +6,42 @@ export default function AuroraBackground() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (!canvasRef.current || window.innerWidth <= 768) return;
+    if (!canvasRef.current) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
-
-    const gradientColors = [
+    const isMobile = window.innerWidth <= 768;
+    const gradientCount = 4;
+    const colors = [
       "rgba(0, 255, 255, 0.15)",
       "rgba(0, 140, 255, 0.12)",
       "rgba(0, 200, 255, 0.15)",
       "rgba(0, 80, 220, 0.1)",
     ];
 
-    function drawAurora() {
+    let lastRender = performance.now();
+    const frameInterval = isMobile ? 40 : 16;
+
+    function drawAurora(time) {
+      if (time - lastRender < frameInterval) {
+        requestAnimationFrame(drawAurora);
+        return;
+      }
+      lastRender = time;
+
       ctx.clearRect(0, 0, width, height);
 
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < gradientCount; i++) {
         const gradient = ctx.createLinearGradient(
           0,
-          Math.sin(Date.now() / 2000 + i) * 200 + 200,
+          Math.sin(time / 2200 + i) * 180 + 180,
           width,
           height
         );
 
-        gradient.addColorStop(0, gradientColors[i]);
+        gradient.addColorStop(0, colors[i]);
         gradient.addColorStop(1, "transparent");
 
         ctx.fillStyle = gradient;
@@ -41,7 +51,7 @@ export default function AuroraBackground() {
       requestAnimationFrame(drawAurora);
     }
 
-    drawAurora();
+    drawAurora(performance.now());
 
     const resize = () => {
       width = canvas.width = window.innerWidth;
@@ -53,15 +63,9 @@ export default function AuroraBackground() {
   }, []);
 
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className="hidden md:block fixed inset-0 w-full h-full -z-20 opacity-[0.8] pointer-events-none"
-      />
-
-      <div className="md:hidden fixed inset-0 -z-20 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,255,255,0.16),transparent_18%),radial-gradient(circle_at_60%_20%,_rgba(0,140,255,0.12),transparent_24%),linear-gradient(180deg,_rgba(2,25,45,0.95),rgba(4,16,24,0.95))]" />
-      </div>
-    </>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 w-full h-full -z-20 opacity-[0.8] pointer-events-none"
+    />
   );
 }

@@ -6,34 +6,41 @@ export default function ParticleBackground() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (!canvasRef.current || window.innerWidth <= 768) return;
+    if (!canvasRef.current) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    const isMobile = window.innerWidth <= 768;
+    const COUNT = isMobile ? 30 : 65;
+    const maxLinkDistance = isMobile ? 100 : 130;
+    const frameInterval = isMobile ? 40 : 16;
+    let lastRender = performance.now();
 
     const particles = [];
-    const COUNT = 65;
-
     const rand = (min, max) => Math.random() * (max - min) + min;
 
-    // Create particles
     for (let i = 0; i < COUNT; i++) {
       particles.push({
         x: rand(0, width),
         y: rand(0, height),
-        vx: rand(-0.35, 0.35),
-        vy: rand(-0.35, 0.35),
-        r: rand(1, 2),
-        glow: rand(0.4, 0.9),
+        vx: rand(isMobile ? -0.25 : -0.35, isMobile ? 0.25 : 0.35),
+        vy: rand(isMobile ? -0.25 : -0.35, isMobile ? 0.25 : 0.35),
+        r: rand(isMobile ? 0.8 : 1, isMobile ? 1.5 : 2),
+        glow: rand(0.35, 0.85),
       });
     }
 
-    function draw() {
+    function draw(time) {
+      if (time - lastRender < frameInterval) {
+        requestAnimationFrame(draw);
+        return;
+      }
+      lastRender = time;
+
       ctx.clearRect(0, 0, width, height);
 
-      // Draw particles
       particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -51,23 +58,24 @@ export default function ParticleBackground() {
         ctx.fill();
       });
 
-      // Draw connection lines
-      for (let i = 0; i < COUNT; i++) {
-        for (let j = i + 1; j < COUNT; j++) {
-          const a = particles[i];
-          const b = particles[j];
+      if (!isMobile) {
+        for (let i = 0; i < COUNT; i++) {
+          for (let j = i + 1; j < COUNT; j++) {
+            const a = particles[i];
+            const b = particles[j];
 
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 130) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(0,255,255,${1 - dist / 130})`;
-            ctx.lineWidth = 0.25;
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
+            if (dist < maxLinkDistance) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(0,255,255,${1 - dist / maxLinkDistance})`;
+              ctx.lineWidth = 0.25;
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
           }
         }
       }
@@ -75,9 +83,8 @@ export default function ParticleBackground() {
       requestAnimationFrame(draw);
     }
 
-    draw();
+    draw(performance.now());
 
-    // Resize handler
     const resize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
@@ -88,15 +95,9 @@ export default function ParticleBackground() {
   }, []);
 
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className="hidden md:block fixed inset-0 w-full h-full -z-10 opacity-70 pointer-events-none"
-      ></canvas>
-
-      <div className="md:hidden fixed inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,255,255,0.12),transparent_20%),radial-gradient(circle_at_bottom_left,_rgba(0,140,255,0.08),transparent_28%),linear-gradient(180deg,rgba(0,18,32,0.8),rgba(2,12,21,0.9))]" />
-      </div>
-    </>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 w-full h-full -z-10 opacity-70 pointer-events-none"
+    ></canvas>
   );
 }
