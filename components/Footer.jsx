@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail, FiExternalLink } from "react-icons/fi";
 import { SiLeetcode, SiHackerrank } from "react-icons/si";
+import VisitorBadge from "./VisitorBadge";
 
 export default function Footer() {
     const links = [
@@ -168,7 +169,11 @@ export default function Footer() {
                     })}
                 </motion.div>
 
-                {/* Bottom Text removed as requested */}
+                {/* Bottom Row: visitor badge + copyright */}
+                <div className="mt-8 flex items-center justify-center gap-4">
+                    <VisitorBadge />
+                    <div className="text-white/50 text-sm">© {new Date().getFullYear()} Tamilarasu A</div>
+                </div>
             </div>
 
             {/* Animated background */}

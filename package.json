@@ -8,6 +8,7 @@
         "start": "node scripts/start-with-fallback-port.js start"
     },
     "dependencies": {
+        "@upstash/redis": "^1.20.0",
         "@emailjs/browser": "^4.4.1",
         "@google/generative-ai": "^0.24.1",
         "autoprefixer": "^10.4.0",
